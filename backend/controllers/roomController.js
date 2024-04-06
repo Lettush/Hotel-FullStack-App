@@ -9,4 +9,17 @@ const getAllRooms = async (req, res, next) => {
   }
 };
 
-module.exports = { getAllRooms };
+const getRoom = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const room = await Room.findById({ _id: id });
+
+    if (!room) return res.status(404).json({ error: "No room found" });
+
+    res.status(200).json(room);
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { getAllRooms, getRoom };
