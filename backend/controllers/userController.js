@@ -1,7 +1,6 @@
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const config = require("../config/config");
 
 const register = async (req, res, next) => {
   try {
@@ -15,11 +14,12 @@ const register = async (req, res, next) => {
       name,
       email,
       password: hashedPassword,
+      admin: false,
     });
     await user.save();
     res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
-    next(error);
+    res.status(400).json({ error: error.message });;
   }
 };
 
@@ -34,12 +34,10 @@ const login = async (req, res, next) => {
     if (!isPasswordValid) {
       return res.status(401).json({ error: "Invalid credentials" });
     }
-    const token = jwt.sign({ userId: user._id }, config.JWT_SECRET, {
-      expiresIn: "1h",
-    });
-    res.status(200).json({ token });
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
+    res.status(200).json({ user, token });
   } catch (error) {
-    next(error);
+    res.status(400).json({ error: error.message });;
   }
 };
 
