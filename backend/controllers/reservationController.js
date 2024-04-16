@@ -1,9 +1,12 @@
 const Reservation = require("../models/reservation");
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const Room = require("../models/room");
+// const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-const createReservation = async (req, res, next) => {
+// Create Reservation
+const createReservation = async (req, res) => {
   try {
-    const { roomId, checkInDate, checkOutDate, paymentMethodId } = req.body;
+    // , paymentMethodId
+    const { roomId, checkInDate, checkOutDate } = req.body;
 
     // Get room details from the database
     const room = await Room.findById(roomId);
@@ -18,13 +21,13 @@ const createReservation = async (req, res, next) => {
     const totalAmount = numberOfNights * room.pricePerNight;
 
     // Create a Stripe payment intent
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: totalAmount,
-      currency: "usd",
-      payment_method: paymentMethodId,
-      confirmation_method: "manual",
-      confirm: true,
-    });
+    // const paymentIntent = await stripe.paymentIntents.create({
+    //   amount: totalAmount,
+    //   currency: "usd",
+    //   payment_method: paymentMethodId,
+    //   confirmation_method: "manual",
+    //   confirm: true,
+    // });
 
     // Create a reservation
     const reservation = new Reservation({
@@ -32,15 +35,36 @@ const createReservation = async (req, res, next) => {
       checkInDate,
       checkOutDate,
       totalAmount,
-      paymentIntentId: paymentIntent.id,
+      // paymentIntentId: paymentIntent.id,
+      paymentIntentId: "Paid",
       user: req.userId,
     });
     await reservation.save();
 
-    res.status(201).json({ message: "Reservation created successfully" });
+    res.status(201).json({ message: "Reservation created successfully." });
   } catch (error) {
-    res.status(400).json({ error: error.message });;
+    res.status(400).json({ error: error.message });
   }
 };
 
-module.exports = { createReservation };
+// Cancel Reservation
+const cancelReservation = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const reservation = await Reservation.findByIdAndUpdate(
+      { _id: id },
+      { canceled: true },
+      { new: true, runValidators: true }
+    );
+    if (!reservation)
+      return res.status(404).json({ error: "No reservation found." });
+
+    res.status(200).json({
+      message: "The reservation has been canceled.",
+      room,
+    });
+  } catch (error) {}
+};
+
+module.exports = { createReservation, cancelReservation };
