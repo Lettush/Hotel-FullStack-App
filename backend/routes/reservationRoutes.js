@@ -3,7 +3,11 @@ const router = express.Router();
 const reservationController = require("../controllers/reservationController");
 const authMiddleware = require("../middleware/authMiddleware");
 
+router.get("/", authMiddleware, reservationController.getAllReservations);
+router.get("/:id", authMiddleware, reservationController.getReservation);
+router.patch("/in/:id", authMiddleware, reservationController.checkIn);
+router.patch("/out/:id", authMiddleware, reservationController.checkOut);
 router.post("/", authMiddleware, reservationController.createReservation);
-router.patch("/", authMiddleware, reservationController.cancelReservation);
+router.patch("/:id", authMiddleware, reservationController.cancelReservation);
 
 module.exports = router;

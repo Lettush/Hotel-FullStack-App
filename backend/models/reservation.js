@@ -28,6 +28,10 @@ const reservationSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    canceled: {
+      type: Boolean,
+      required: true,
+    }
   },
   { timestamps: true }
 );
