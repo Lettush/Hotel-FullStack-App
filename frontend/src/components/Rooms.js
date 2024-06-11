@@ -12,7 +12,7 @@ const Rooms = () => {
       })
       .then((data) => {
         setRooms(data);
-        setIsLoading(!isLoading);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error(error.message);
@@ -20,22 +20,26 @@ const Rooms = () => {
   }, []);
   return (
     <div>
-      {rooms.map((room) => (
-        <div>
-          <h3>{room.name}</h3>
-          <ul>
-            <li>{room.description}</li>
-            <li>${room.pricePerNight}</li>
-            <li>
-              {room.availability ? (
-                <span>Available</span>
-              ) : (
-                <span>Unavailable</span>
-              )}
-            </li>
-          </ul>
-        </div>
-      ))}
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        rooms.map((room) => (
+          <div>
+            <h3>{room.name}</h3>
+            <ul>
+              <li>{room.description}</li>
+              <li>${room.pricePerNight}</li>
+              <li>
+                {room.availability ? (
+                  <span>Available</span>
+                ) : (
+                  <span>Unavailable</span>
+                )}
+              </li>
+            </ul>
+          </div>
+        ))
+      )}
     </div>
   );
 };
