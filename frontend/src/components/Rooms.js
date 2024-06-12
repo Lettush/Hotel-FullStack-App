@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import "./styles/Rooms.css";
+import { Link } from "react-router-dom";
 
 const Rooms = () => {
   const [rooms, setRooms] = useState([]);
@@ -23,22 +25,27 @@ const Rooms = () => {
       {isLoading ? (
         <div>Loading...</div>
       ) : (
-        rooms.map((room) => (
-          <div>
-            <h3>{room.name}</h3>
-            <ul>
-              <li>{room.description}</li>
-              <li>${room.pricePerNight}</li>
-              <li>
-                {room.availability ? (
-                  <span>Available</span>
-                ) : (
-                  <span>Unavailable</span>
-                )}
-              </li>
-            </ul>
-          </div>
-        ))
+        <>
+          <h2 className="page-header">Rooms</h2>
+          {rooms.map((room) => (
+            <Link to={`/rooms/${room._id}`} className="room-link">
+              <div className="room">
+                <h3>{room.name}</h3>
+                <ul>
+                  <li>{room.description}</li>
+                  <li>${room.pricePerNight}</li>
+                  {/* <li>
+                  {room.availability ? (
+                    <span>Available</span>
+                  ) : (
+                    <span>Unavailable</span>
+                  )}
+                </li> */}
+                </ul>
+              </div>
+            </Link>
+          ))}
+        </>
       )}
     </div>
   );

@@ -18,6 +18,7 @@ import Login from "./components/Login";
 import Rooms from "./components/Rooms";
 import Reservations from "./components/Reservations";
 import RoomDetails from "./components/RoomDetails";
+import "./App.css"
 
 function App() {
   return (

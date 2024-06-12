@@ -1,0 +1,26 @@
+/* Room Cards */
+.room-link {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.room {
+  background-color: var(--highlight);
+  margin: 20px 20px;
+  padding: 30px;
+  border-radius: 20px;
+}
+
+.room h3 {
+  font-size: 2em;
+}
+
+.room ul {
+  display: flex;
+  justify-content: space-between;
+}
+
+.room ul li {
+  list-style: none;
+  font-size: 1.125em;
+}

@@ -43,7 +43,7 @@ const Reservations = () => {
               <li>${reservation.totalAmount}</li>
               <li>{reservation.paymentIntentId !== "" ? "Paid" : "Unpaid"}</li>
               <li>{reservation.user}</li>
-              <li>{reservation.canceled && <span>Canceled</span>}</li>
+              {reservation.canceled && <li>Canceled</li>}
             </ul>
           </div>
         ))

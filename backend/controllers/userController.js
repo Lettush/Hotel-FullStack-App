@@ -2,7 +2,20 @@ const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const register = async (req, res, next) => {
+const getUser = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const user = await User.findById({ _id: id });
+
+    if (!user) return res.status(404).json({ error: "No user found" });
+
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+const register = async (req, res) => {
   try {
     const { name, email, password } = req.body;
     const existingUser = await User.findOne({ email });
@@ -19,11 +32,11 @@ const register = async (req, res, next) => {
     await user.save();
     res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
-    res.status(400).json({ error: error.message });;
+    res.status(400).json({ error: error.message });
   }
 };
 
-const login = async (req, res, next) => {
+const login = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
@@ -37,8 +50,8 @@ const login = async (req, res, next) => {
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
     res.status(200).json({ user, token });
   } catch (error) {
-    res.status(400).json({ error: error.message });;
+    res.status(400).json({ error: error.message });
   }
 };
 
-module.exports = { register, login };
+module.exports = { register, login, getUser };

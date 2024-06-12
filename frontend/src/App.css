@@ -1,0 +1,105 @@
+/* General Styling */
+:root {
+  --bg-color: #514594;
+  --secondary-bg: #7b7bae;
+  --highlight: #928bc1;
+  --primary: #ffffff;
+  --secondary: #f4eeea;
+  --shadow: #00000046;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial;
+}
+
+body {
+  min-height: 100dvh;
+  background: #928bc1;
+  background: linear-gradient(0deg, #928bc1 0%, #26235c 100%);
+  color: var(--primary);
+}
+
+.page-header {
+  text-align: center;
+  margin: 40px 0;
+  font-size: 2.5em;
+}
+
+/* Navbar */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px;
+  background-color: var(--primary);
+}
+
+nav h1 a {
+  font-size: 2em;
+  color: var(--bg-color);
+  text-decoration: none;
+}
+
+nav ul {
+  display: flex;
+}
+
+nav ul li {
+  list-style: none;
+  margin-right: 30px;
+}
+
+nav ul li a {
+  font-size: 1.25em;
+  text-decoration: none;
+  color: var(--bg-color);
+}
+
+/* Footer */
+body {
+  position: relative;
+}
+
+body::after {
+  display: block;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 15px;
+  background-color: var(--primary);
+  box-shadow: 0 -5px 6px var(--shadow);
+  display: flex;
+  justify-content: space-evenly;
+}
+
+footer div {
+  padding: 20px;
+  width: 100%;
+}
+
+footer div:first-child ul {
+  display: flex;
+  gap: 10px;
+}
+
+footer div:nth-child(2) ul {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+footer div h3 {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+footer div h3, footer div ul li {
+  color: var(--bg-color);
+  list-style: none;
+}
