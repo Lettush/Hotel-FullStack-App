@@ -7,7 +7,7 @@ import "./styles/Home.css";
 
 const Home = () => {
   return (
-    <>
+    <div>
       <div className="hero"></div>
       <div className="content-group">
         <div>
@@ -38,7 +38,7 @@ const Home = () => {
       <div className="recentRooms">
         
       </div>
-    </>
+    </div>
   );
 };
 
