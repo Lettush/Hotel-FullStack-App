@@ -1,8 +1,8 @@
 /* General Styling */
 :root {
-  --bg-color: #514594;
-  --secondary-bg: #7b7bae;
-  --highlight: #928bc1;
+  --bg-color: #1e294e;
+  --secondary-bg: #3e4f88;
+  --highlight: #516bbe;
   --primary: #ffffff;
   --secondary: #f4eeea;
   --shadow: #00000046;
@@ -17,8 +17,8 @@
 
 body {
   min-height: 100dvh;
-  background: #928bc1;
-  background: linear-gradient(0deg, #928bc1 0%, #26235c 100%);
+  background: var(--bg-color);
+  background: linear-gradient(0deg, var(--highlight) 0%, var(--bg-color) 100%);
   color: var(--primary);
 }
 
@@ -33,12 +33,12 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 25px;
+  padding: 15px;
   background-color: var(--primary);
 }
 
 nav h1 a {
-  font-size: 2em;
+  font-size: 1.5em;
   color: var(--bg-color);
   text-decoration: none;
 }
@@ -53,24 +53,19 @@ nav ul li {
 }
 
 nav ul li a {
-  font-size: 1.25em;
+  font-size: 1em;
   text-decoration: none;
   color: var(--bg-color);
 }
 
 /* Footer */
-body {
-  position: relative;
-}
-
-body::after {
-  display: block;
+.main {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 }
 
 footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
   padding: 15px;
   background-color: var(--primary);
   box-shadow: 0 -5px 6px var(--shadow);
@@ -79,6 +74,7 @@ footer {
 }
 
 footer div {
+  min-height: 50px;
   padding: 20px;
   width: 100%;
 }

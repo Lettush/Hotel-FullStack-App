@@ -18,22 +18,22 @@ import Login from "./components/Login";
 import Rooms from "./components/Rooms";
 import Reservations from "./components/Reservations";
 import RoomDetails from "./components/RoomDetails";
-import "./App.css"
+import "./App.css";
 
 function App() {
   return (
-    <div>
+    <div className="main">
       <Router>
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/rooms" element={<Rooms />} />
-          <Route path="/rooms/:id" element={<RoomDetails />} />
-          <Route path="/reservations" element={<Reservations />} />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/rooms" element={<Rooms />} />
+            <Route path="/rooms/:id" element={<RoomDetails />} />
+            <Route path="/reservations" element={<Reservations />} />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
         <Footer />
       </Router>
     </div>

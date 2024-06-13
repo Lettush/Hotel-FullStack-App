@@ -12,22 +12,22 @@ const Footer = () => {
         <ul>
           <li>
             <a href="#">
-              <FaFacebook color="#514594" size="1.5em" />
+              <FaFacebook color="#3a4a85" size="1.5em" />
             </a>
           </li>
           <li>
             <a href="#">
-              <FaTwitter color="#514594" size="1.5em" />
+              <FaTwitter color="#3a4a85" size="1.5em" />
             </a>
           </li>
           <li>
             <a href="#">
-              <FaInstagram color="#514594" size="1.5em" />
+              <FaInstagram color="#3a4a85" size="1.5em" />
             </a>
           </li>
           <li>
             <a href="#">
-              <FaYoutube color="#514594" size="1.5em" />
+              <FaYoutube color="#3a4a85" size="1.5em" />
             </a>
           </li>
         </ul>
