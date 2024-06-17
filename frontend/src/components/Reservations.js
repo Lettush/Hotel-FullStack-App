@@ -1,20 +1,25 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Reservations = () => {
   const [reservations, setReservations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("http://localhost:4000/api/reservations", {
       headers: {
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     })
       .then((response) => {
-        if (!response.ok) throw new Error(response.status);
-        else return response.json();
+        if (!response.ok) {
+          if (response.status === 401) {
+            return navigate("/");
+          }
+          throw new Error(response.status);
+        } else return response.json();
       })
       .then((data) => {
         setReservations(data);
@@ -33,11 +38,7 @@ const Reservations = () => {
         reservations.map((reservation) => (
           <div>
             <ul>
-              <Link
-                to={`/rooms/${reservation.roomId}`}
-              >
-                Room
-              </Link>
+              <Link to={`/rooms/${reservation.roomId}`}>Room</Link>
               <li>{reservation.checkInDate}</li>
               <li>{reservation.checkOutDate}</li>
               <li>${reservation.totalAmount}</li>

@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 
 // CORS for querying different domains
 const corsOpts = {
-  origin: "*",
+  origin: ["http://localhost:3000"],
   credentials: true,
   methods: ["GET", "POST", "PATCH", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],

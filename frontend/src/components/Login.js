@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
+import "./styles/Login.css";
 
 const Login = () => {
   // Form
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -23,9 +23,18 @@ const Login = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        localStorage.setItem("name", data.user.name);
-        localStorage.setItem("token", data.token);
-        navigate("/");
+        if (data.error) {
+          setIsLoading(false);
+          throw new Error(data.error);
+        } else {
+          localStorage.setItem("name", data.name);
+          localStorage.setItem("email", data.email);
+          localStorage.setItem("token", data.token);
+          navigate("/");
+        }
+      })
+      .catch((error) => {
+        console.log(error.message);
       });
   };
 
@@ -40,24 +49,33 @@ const Login = () => {
   };
 
   return (
-    <div>
-        <div style={{ display: !isLoading ? "none" : "block" }}>Loading...</div>
-      <form style={{ display: isLoading ? "none" : "block" }}>
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          name="email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
+    <div className="login">
+      <div style={{ display: !isLoading ? "none" : "block" }}>Loading...</div>
+      <form style={{ display: isLoading ? "none" : "flex" }}>
+        <h3>Login</h3>
+        <div className="input-group">
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            name="email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
 
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          name="password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <div className="input-group">
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            name="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
 
         <button onClick={handleLogin}>Login</button>
+
+        <div className="link">
+          Don't have an account? <Link to="/register">Register</Link>
+        </div>
       </form>
     </div>
   );

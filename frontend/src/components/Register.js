@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./styles/Register.css";
 
 const Register = () => {
   // Form fields
@@ -25,7 +26,7 @@ const Register = () => {
       }),
     })
       .then((response) => {
-        if (response.ok) navigate("/");
+        if (response.ok) navigate("/login");
         else throw new Error(response.status);
       })
       .catch((error) => {
@@ -44,42 +45,47 @@ const Register = () => {
       return console.error("Passwords do not match!");
 
     setIsLoading(true);
-    const response = createAccount();
+    createAccount();
   };
 
   return (
-    <div>
+    <div className="register">
       <div style={{ display: !isLoading ? "none" : "block" }}>Loading...</div>
 
       <form style={{ display: isLoading ? "none" : "block" }}>
-        <label htmlFor="name">Name:</label>
-        <input
-          type="text"
-          name="name"
-          onChange={(e) => setName(e.target.value)}
-        />
-
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          name="email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          name="password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-
-        <label htmlFor="confirm-pass">Confirm Password:</label>
-        <input
-          type="password"
-          name="confirm-pass"
-          onChange={(e) => setConfirmPass(e.target.value)}
-        />
-
+        <h3>Register</h3>
+        <div className="input-group">
+          <label htmlFor="name">Name:</label>
+          <input
+            type="text"
+            name="name"
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <div className="input-group">
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            name="email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="input-group">
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            name="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div className="input-group">
+          <label htmlFor="confirm-pass">Confirm Password:</label>
+          <input
+            type="password"
+            name="confirm-pass"
+            onChange={(e) => setConfirmPass(e.target.value)}
+          />
+        </div>
         <button onClick={handleSignup}>Register</button>
       </form>
     </div>
