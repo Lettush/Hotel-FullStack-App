@@ -28,71 +28,6 @@ const getReservation = async (req, res) => {
   }
 };
 
-// Check In
-const checkIn = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const reservation = await Reservation.findById({ _id: id });
-
-    if (!reservation)
-      return res.status(404).json({ error: "No reservation found." });
-    if (reservation.canceled)
-      return res.status(400).json({ error: "The reservation was cancelled!" });
-
-    // Get room details from the database
-    const room = await Room.findById({ _id: reservation.roomId });
-
-    if (!room.availability)
-      return res.status(400).json({ error: "The room has a current check-in!" });
-
-    // If room is available
-    const updatedRoom = await Room.findByIdAndUpdate(
-      { _id: reservation.roomId },
-      { availability: false },
-      { new: true, runValidators: true }
-    );
-
-    res
-      .status(200)
-      .json({ message: "The check-in to the room has been successful.", updatedRoom });
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-};
-
-// Check Out
-const checkOut = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const reservation = await Reservation.findById({ _id: id });
-
-    if (!reservation)
-      return res.status(404).json({ error: "No reservation found." });
-
-    // Get room details from the database
-    const room = await Room.findById({ _id: reservation.roomId });
-
-    if (room.availability)
-      return res.status(400).json({ error: "The room doesn't have a current check-in!" });
-
-    // If room is not available
-    const updatedRoom = await Room.findByIdAndUpdate(
-      { _id: reservation.roomId },
-      { availability: true },
-      { new: true, runValidators: true }
-    );
-
-    res
-      .status(200)
-      .json({
-        message: "The check-out of the room has been successful.",
-        room: updatedRoom,
-      });
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-};
-
 // Create Reservation
 const createReservation = async (req, res) => {
   try {
@@ -170,7 +105,5 @@ module.exports = {
   createReservation,
   getAllReservations,
   getReservation,
-  checkIn,
-  checkOut,
   cancelReservation,
 };
