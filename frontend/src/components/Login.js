@@ -52,24 +52,21 @@ const Login = () => {
     <div className="login">
       <div style={{ display: !isLoading ? "none" : "block" }}>Loading...</div>
       <form style={{ display: isLoading ? "none" : "flex" }}>
-        <h3>Login</h3>
-        <div className="input-group">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            name="email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
+        <h2>Login</h2>
 
-        <div className="input-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            name="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
         <button onClick={handleLogin}>Login</button>
 

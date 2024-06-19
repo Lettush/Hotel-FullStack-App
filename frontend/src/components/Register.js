@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 import "./styles/Register.css";
 
 const Register = () => {
@@ -53,40 +55,41 @@ const Register = () => {
       <div style={{ display: !isLoading ? "none" : "block" }}>Loading...</div>
 
       <form style={{ display: isLoading ? "none" : "block" }}>
-        <h3>Register</h3>
-        <div className="input-group">
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            name="name"
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div className="input-group">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            name="email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="input-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            name="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <div className="input-group">
-          <label htmlFor="confirm-pass">Confirm Password:</label>
-          <input
-            type="password"
-            name="confirm-pass"
-            onChange={(e) => setConfirmPass(e.target.value)}
-          />
-        </div>
+        <h2>Register</h2>
+
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          onChange={(e) => setName(e.target.value)}
+        />
+
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <input
+          type="password"
+          name="confirm-pass"
+          placeholder="Confirm Password"
+          onChange={(e) => setConfirmPass(e.target.value)}
+        />
+
         <button onClick={handleSignup}>Register</button>
+
+        <div className="link">
+          Already have an account? <Link to="/login">Login</Link>
+        </div>
       </form>
     </div>
   );

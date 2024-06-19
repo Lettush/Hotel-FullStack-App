@@ -17,6 +17,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Rooms from "./components/Rooms";
 import Reservations from "./components/Reservations";
+import ReservationForm from "./components/ReservationForm";
 import RoomDetails from "./components/RoomDetails";
 import "./App.css";
 
@@ -32,6 +33,7 @@ function App() {
             <Route path="/rooms" element={<Rooms />} />
             <Route path="/rooms/:id" element={<RoomDetails />} />
             <Route path="/reservations" element={<Reservations />} />
+            <Route path="/reservation/:id" element={<ReservationForm />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         <Footer />
