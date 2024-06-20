@@ -1,5 +1,6 @@
 const Reservation = require("../models/reservation");
 const Room = require("../models/room");
+const jwt = require("jsonwebtoken");
 // const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 // Get All Reservations
@@ -32,7 +33,7 @@ const getReservation = async (req, res) => {
 const createReservation = async (req, res) => {
   try {
     // , paymentMethodId
-    const { roomId, checkInDate, checkOutDate, user } = req.body;
+    const { roomId, checkInDate, checkOutDate } = req.body;
 
     // Get room details from the database
     const room = await Room.findByIdAndUpdate(
@@ -49,6 +50,10 @@ const createReservation = async (req, res) => {
       (new Date(checkOutDate) - new Date(checkInDate)) / (1000 * 60 * 60 * 24)
     );
     const totalAmount = numberOfNights * room.pricePerNight;
+
+    // Get User From Token
+    const token = req.header("Authorization");
+    const user = jwt.verify(token.substring(7), process.env.JWT_SECRET).userId;
 
     // Create a Stripe payment intent
     // const paymentIntent = await stripe.paymentIntents.create({

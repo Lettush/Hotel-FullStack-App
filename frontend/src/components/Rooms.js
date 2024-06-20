@@ -28,7 +28,7 @@ const Rooms = () => {
         <>
           <h2 className="page-header">Rooms</h2>
           {rooms.map((room) => (
-            <Link to={`/rooms/${room._id}`} className="room-link">
+            <Link to={`/rooms/${room._id}`} className="room-link" key={room._id}>
               <div className="room">
                 <h3>{room.name}</h3>
                 <ul>
