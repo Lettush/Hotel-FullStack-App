@@ -1,0 +1,47 @@
+.appointment-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin: 20px;
+  border-radius: 25px;
+  display: flex; /* Allows stacking elements horizontally */
+  align-items: center; /* Aligns content vertically */
+}
+
+.appointment-card.canceled {
+  background-color: #f9f9f9;
+  opacity: 0.5;
+}
+
+.appointment-details {
+  flex: 1; /* Takes up remaining space after room link icon */
+  margin-left: 10px;
+  list-style: none;
+}
+
+.room-link {
+  width: 30px;
+  height: 30px;
+  background-color: #ddd;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center; /* Aligns icon content horizontally */
+  align-items: center; /* Aligns icon content vertically */
+  color: black;
+}
+
+.room-link i {
+  color: #007bff; /* Adjust icon color as needed */
+  font-size: 18px;
+}
+
+.appointment-details h3 {
+  margin-top: 0;
+  font-size: 16px;
+}
+
+.appointment-details li {
+  color: black;
+  margin: 5px 0;
+  font-size: 14px;
+}

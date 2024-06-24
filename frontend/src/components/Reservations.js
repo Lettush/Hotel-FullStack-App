@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import './styles/Reservations.css';
+
 const Reservations = () => {
   const [reservations, setReservations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -63,18 +65,16 @@ const Reservations = () => {
         <div>Loading...</div>
       ) : (
         reservations.map((reservation) => (
-          <div key={reservation._id}>
-            <ul>
-              <Link to={`/rooms/${reservation.roomId}`}>Room</Link>
+          <div key={reservation._id}  className={`appointment-card ${reservation.canceled && 'canceled'}`}>
+            <ul className="appointment-details">
+              <Link to={`/rooms/${reservation.roomId}`} className="room-link">Room</Link>
               <li>{reservation.checkInDate}</li>
               <li>{reservation.checkOutDate}</li>
               <li>${reservation.totalAmount}</li>
               <li>{reservation.paymentIntentId !== "" ? "Paid" : "Unpaid"}</li>
               <li>{reservation.user}</li>
               <li>
-                {reservation.canceled ? (
-                  <span>Canceled</span>
-                ) : (
+                {!reservation.canceled && (
                   <button onClick={() => cancelReservation(reservation._id)}>
                     Cancel
                   </button>
