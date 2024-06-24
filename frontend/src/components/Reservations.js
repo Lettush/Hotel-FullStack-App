@@ -67,7 +67,7 @@ const Reservations = () => {
         reservations.map((reservation) => (
           <div key={reservation._id}  className={`appointment-card ${reservation.canceled && 'canceled'}`}>
             <ul className="appointment-details">
-              <Link to={`/rooms/${reservation.roomId}`} className="room-link">Room</Link>
+              <Link to={`/rooms/${reservation.roomId}`} className="reservation-room-link">Room</Link>
               <li>{reservation.checkInDate}</li>
               <li>{reservation.checkOutDate}</li>
               <li>${reservation.totalAmount}</li>

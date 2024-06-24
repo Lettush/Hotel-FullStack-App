@@ -19,7 +19,7 @@
   list-style: none;
 }
 
-.room-link {
+.reservation-room-link {
   width: 30px;
   height: 30px;
   background-color: #ddd;
@@ -30,7 +30,7 @@
   color: black;
 }
 
-.room-link i {
+.reservation-room-link i {
   color: #007bff; /* Adjust icon color as needed */
   font-size: 18px;
 }
