@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import './styles/Reservations.css';
+import "./styles/Reservations.css";
 
 const Reservations = () => {
   const [reservations, setReservations] = useState([]);
@@ -64,25 +64,40 @@ const Reservations = () => {
       {isLoading ? (
         <div>Loading...</div>
       ) : (
-        reservations.map((reservation) => (
-          <div key={reservation._id}  className={`appointment-card ${reservation.canceled && 'canceled'}`}>
-            <ul className="appointment-details">
-              <Link to={`/rooms/${reservation.roomId}`} className="reservation-room-link">Room</Link>
-              <li>{reservation.checkInDate}</li>
-              <li>{reservation.checkOutDate}</li>
-              <li>${reservation.totalAmount}</li>
-              <li>{reservation.paymentIntentId !== "" ? "Paid" : "Unpaid"}</li>
-              <li>{reservation.user}</li>
-              <li>
-                {!reservation.canceled && (
-                  <button onClick={() => cancelReservation(reservation._id)}>
-                    Cancel
-                  </button>
-                )}
-              </li>
-            </ul>
-          </div>
-        ))
+        <>
+          <h2 className="page-header">Reservations</h2>
+          {reservations.map((reservation) => (
+            <div
+              key={reservation._id}
+              className={`appointment-card ${
+                reservation.canceled && "canceled"
+              }`}
+            >
+              <ul className="appointment-details">
+                <Link
+                  to={`/rooms/${reservation.roomId}`}
+                  className="reservation-room-link"
+                >
+                  Room
+                </Link>
+                <li>{reservation.checkInDate}</li>
+                <li>{reservation.checkOutDate}</li>
+                <li>${reservation.totalAmount}</li>
+                <li>
+                  {reservation.paymentIntentId !== "" ? "Paid" : "Unpaid"}
+                </li>
+                <li>{reservation.user}</li>
+                <li>
+                  {!reservation.canceled && (
+                    <button onClick={() => cancelReservation(reservation._id)}>
+                      Cancel
+                    </button>
+                  )}
+                </li>
+              </ul>
+            </div>
+          ))}
+        </>
       )}
     </div>
   );
