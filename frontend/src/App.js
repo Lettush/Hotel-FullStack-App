@@ -22,20 +22,31 @@ import RoomDetails from "./components/RoomDetails";
 import "./App.css";
 
 function App() {
+  const token = localStorage.getItem("token")
+    ? localStorage.getItem("token")
+    : false;
+
   return (
     <div className="main">
       <Router>
         <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/rooms" element={<Rooms />} />
-            <Route path="/rooms/:id" element={<RoomDetails />} />
-            <Route path="/reservations" element={<Reservations />} />
-            <Route path="/reservation/:id" element={<ReservationForm />} />
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          {token ? (
+            <>
+              <Route path="/rooms" element={<Rooms />} />
+              <Route path="/rooms/:id" element={<RoomDetails />} />
+              <Route path="/reservations" element={<Reservations />} />
+              <Route path="/reservation/:id" element={<ReservationForm />} />
+            </>
+          ) : (
+            <>
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+            </>
+          )}
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
         <Footer />
       </Router>
     </div>
