@@ -17,6 +17,13 @@
   border-radius: 5px; /* Add rounded corners */
 }
 
+.reservation-form form div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+
 /* Style the input fields */
 .reservation-form form input[type="date"] {
   width: 100%; /* Make the input fields full width */

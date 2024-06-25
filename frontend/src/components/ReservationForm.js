@@ -63,6 +63,23 @@ const ReservationForm = () => {
       });
   };
 
+  // Setting today
+  let today = new Date();
+  let [dd, mm, yyyy] = [
+    today.getDate(),
+    today.getMonth() + 1,
+    today.getFullYear(),
+  ];
+
+  if (dd < 10) {
+    dd = "0" + dd;
+  }
+
+  if (mm < 10) {
+    mm = "0" + mm;
+  }
+
+  today = yyyy + "-" + mm + "-" + dd;
   return loading ? (
     <div>Loading...</div>
   ) : (
@@ -70,18 +87,23 @@ const ReservationForm = () => {
       <form>
         <h2>Reservation Form</h2>
         <div>
+          <label htmlFor="check-in">Check-In Date</label>
           <input
             type="date"
             name="check-in"
             id="check-in"
+            min={today}
             onChange={(e) => {
               setCheckIn(e.target.value);
             }}
           />
+
+          <label htmlFor="check-out">Check-Out Date</label>
           <input
             type="date"
             name="check-out"
             id="check-out"
+            min={checkIn ? checkIn : today}
             onChange={(e) => {
               setCheckOut(e.target.value);
             }}
