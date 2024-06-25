@@ -68,6 +68,7 @@ const ReservationForm = () => {
   ) : (
     <div className="reservation-form">
       <form>
+        <h2>Reservation Form</h2>
         <div>
           <input
             type="date"
